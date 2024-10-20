@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 // import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -30,6 +32,10 @@ public class Robot extends TimedRobot {
   private Joystick m_joystick;
   // private Encoder m_encoder;
 
+  // Initializes an AnalogInput on port 0
+  AnalogInput analog0 = new AnalogInput(0);
+  DigitalOutput digital1 = new DigitalOutput(1);
+
   private double m_setpoint;
 
   @Override
@@ -40,6 +46,10 @@ public class Robot extends TimedRobot {
     // Use SetDistancePerPulse to set the multiplier for GetDistance
     // This is set up assuming a 6 inch wheel with a 360 CPR encoder.
     // m_encoder.setDistancePerPulse((Math.PI * 6) / 360.0);
+
+    digital1.enablePWM(0.5);
+    digital1.setPWMRate(50.0);  // 50 Hz or 1/20ms
+
   }
 
   /*
@@ -48,7 +58,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    // SmartDashboard.putNumber("Encoder", m_encoder.getDistance());
+    SmartDashboard.putNumber("Analog Voltage", analog0.getVoltage());
   }
 
   @Override
@@ -57,5 +67,6 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putNumber("PWM outputEncoder", m_setpoint);
     m_motor.set(m_setpoint);
+    digital1.updateDutyCycle(m_setpoint);
   }
 }
