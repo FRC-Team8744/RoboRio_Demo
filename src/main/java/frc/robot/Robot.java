@@ -18,19 +18,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  * <p>Joystick analog values range from -1 to 1 and motor controller inputs also range from -1 to 1
  * making it easy to work together.
- *
- * <p>In addition, the encoder value of an encoder connected to ports 0 and 1 is consistently sent
- * to the Dashboard.
  */
 public class Robot extends TimedRobot {
   private static final int kMotorPort = 0;
   private static final int kJoystickPort = 0;
-  // private static final int kEncoderPortA = 0;
-  // private static final int kEncoderPortB = 1;
 
   private PWMSparkMax m_motor;
   private Joystick m_joystick;
-  // private Encoder m_encoder;
 
   // Initializes an AnalogInput on port 0
   AnalogInput analog0 = new AnalogInput(0);
@@ -42,10 +36,6 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_motor = new PWMSparkMax(kMotorPort);
     m_joystick = new Joystick(kJoystickPort);
-    // m_encoder = new Encoder(kEncoderPortA, kEncoderPortB);
-    // Use SetDistancePerPulse to set the multiplier for GetDistance
-    // This is set up assuming a 6 inch wheel with a 360 CPR encoder.
-    // m_encoder.setDistancePerPulse((Math.PI * 6) / 360.0);
 
     digital1.enablePWM(0.5);
     digital1.setPWMRate(50.0);  // 50 Hz or 1/20ms
