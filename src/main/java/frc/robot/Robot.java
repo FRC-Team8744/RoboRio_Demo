@@ -29,6 +29,7 @@ public class Robot extends TimedRobot {
   // Initializes an AnalogInput on port 0
   AnalogInput analog0 = new AnalogInput(0);
   DigitalOutput digital1 = new DigitalOutput(1);
+  // this is an edit
 
   private double m_setpoint;
 
